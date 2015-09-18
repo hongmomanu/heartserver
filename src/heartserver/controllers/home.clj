@@ -22,7 +22,7 @@
 
 
 
-(defn callToRomm [content]
+(defn callArrToRoom [content]
 
   (try
       (do
@@ -33,6 +33,89 @@
       )
 
     )
+
+  )
+
+(defn callToRoom [type name status id room]
+
+  (timbre/info "fire callToRoom : " room ",name:" name ",type: " type ",status: " status ",id: " id)
+  (doseq [channel (keys @websocket/channel-hub)]
+    (when (= (get  (get @websocket/channel-hub channel) "type") "mainscreen")
+
+      (send! channel (generate-string
+                       {
+                         :room room
+                         :name name
+                         :value value
+                         :type "callpatient"
+                         }
+                       )
+        false)
+
+      )
+    )
+  (ok {:success true})
+
+  )
+(defn fireprop [room name value]
+
+  (timbre/info "fire prop room : " room ",name:" name ",value: " value)
+  (doseq [channel (keys @websocket/channel-hub)]
+    (when (= (get  (get @websocket/channel-hub channel) "content") room)
+
+      (send! channel (generate-string
+                       {
+                         :room room
+                         :name name
+                         :value value
+                         :type "fireprop"
+                         }
+                       )
+        false)
+
+      )
+    )
+  (ok {:success true})
+
+  )
+
+(defn firerefreshsystem [room]
+
+  (timbre/info "fire refresh system by  room : " room )
+
+  (doseq [channel (keys @websocket/channel-hub)]
+    (when (= (get  (get @websocket/channel-hub channel) "content") room)
+
+      (send! channel (generate-string
+                       {
+                         :room room
+                         :type "freshsystem"
+                         }
+                       )
+        false)
+
+      )
+    )
+  (ok {:success true})
+  )
+
+(defn clearscreen [room]
+
+  (timbre/info "fire clear room : " room )
+  (doseq [channel (keys @websocket/channel-hub)]
+    (when (= (get  (get @websocket/channel-hub channel) "content") room)
+
+      (send! channel (generate-string
+                       {
+                         :room room
+                         :type "clearscreen"
+                         }
+                       )
+        false)
+
+      )
+    )
+  (ok {:success true})
 
   )
 

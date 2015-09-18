@@ -14,6 +14,11 @@
 
 (defroutes home-routes
   (GET "/" [] (home-page))
-  (GET "/callToRomm" [content] (home/callToRomm content))
+  (GET "/helloheart" [] (ok {:success true}))
+  (GET "/fireprop" [room name value] (home/fireprop room name value))
+  (GET "/firerefreshsystem" [room] (home/firerefreshsystem room))
+  (GET "/clearscreen" [room] (home/clearscreen room))
+  (GET "/callArrToRoom" [content] (home/callArrToRoom content))
+  (GET "/callToRoom" [type name status id room] (home/callToRoom type name status id room))
   (GET "/about" [] (about-page)))
 
