@@ -36,23 +36,36 @@
 
   )
 
-(defn callToRoom [type name status id room]
+(defn callToRoom [lineno name  room]
 
-  (timbre/info "fire callToRoom : " room ",name:" name ",type: " type ",status: " status ",id: " id)
+  (timbre/info "fire callToRoom : " room ",name:" name ",lineno: " lineno )
   (doseq [channel (keys @websocket/channel-hub)]
-    (when (= (get  (get @websocket/channel-hub channel) "type") "mainscreen")
+    (if (= (get  (get @websocket/channel-hub channel) "type") "mainscreen")
 
       (send! channel (generate-string
                        {
                          :room room
                          :name name
-                         :value value
+                         :lineno lineno
                          :type "callpatient"
                          }
                        )
-        false)
+        false)(when (= (get  (get @websocket/channel-hub channel) "content") room)
+
+                (send! channel (generate-string
+                                 {
+                                   :room room
+                                   :name name
+                                   :lineno lineno
+                                   :type "callpatient"
+                                   }
+                                 )
+                  false)
+
+                )
 
       )
+
     )
   (ok {:success true})
 
