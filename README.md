@@ -19,10 +19,12 @@ To start a web server for the application, run:
 Copyright © 2015 FIXME
 
 
-大屏提示更新接口
+接口
 (room:1,2,3,4,heartbig)
+(status:0,1,2,3)0：呼叫,1：检查,2：完成,3：过号
 http://localhost:3000/fireprop?room=heartbig&name=tip&value=温馨提示：不以物喜，不以己悲。居庙堂之高则忧其民；处江湖之远则忧其君。
-http://localhost:3000/callToRoom?room=1&lineno=A001&name=jack
+http://localhost:3000/callToRoom?room=1&lineno=A001&name=jack&status=0
+http://localhost:3000/fireprop?room=heartbig&name=showlines&value=4
 
 
 

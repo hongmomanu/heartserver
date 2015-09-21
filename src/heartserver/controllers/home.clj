@@ -68,7 +68,7 @@
 
 
   )
-(defn callToRoom [lineno name  room]
+(defn callToRoom [lineno name  room status]
 
   (timbre/info "fire callToRoom : " room ",name:" name ",lineno: " lineno )
   (doseq [channel (keys @websocket/channel-hub)]
@@ -78,6 +78,7 @@
                        {
                          :room room
                          :name name
+                         :status status
                          :lineno lineno
                          :type "callpatient"
                          }
@@ -88,6 +89,7 @@
                                  {
                                    :room room
                                    :name name
+                                   :status status
                                    :lineno lineno
                                    :type "callpatient"
                                    }
