@@ -19,6 +19,7 @@
   (GET "/firerefreshsystem" [room] (home/firerefreshsystem room))
   (GET "/clearscreen" [room] (home/clearscreen room))
   (GET "/callArrToRoom" [content] (home/callArrToRoom content))
-  (GET "/callToRoom" [lineno name  room] (home/callToRoom lineno name  room))
+  (GET "/callToRoom" [lineno name  room ] (home/callToRoom lineno name  room))
+  (GET "/changeStatus" [lineno status  room ] (home/changeStatus lineno status  room ))
   (GET "/about" [] (about-page)))
 

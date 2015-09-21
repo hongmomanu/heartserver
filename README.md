@@ -20,7 +20,10 @@ Copyright © 2015 FIXME
 
 
 大屏提示更新接口
+(room:1,2,3,4,heartbig)
 http://localhost:3000/fireprop?room=heartbig&name=tip&value=温馨提示：不以物喜，不以己悲。居庙堂之高则忧其民；处江湖之远则忧其君。
+http://localhost:3000/callToRoom?room=1&lineno=A001&name=jack
+
 
 
 

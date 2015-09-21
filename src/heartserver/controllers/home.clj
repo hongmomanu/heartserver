@@ -36,6 +36,38 @@
 
   )
 
+(defn changeStatus [lineno status  room]
+  (timbre/info "fire changeStatus : " room ",status:" status ",lineno: " lineno )
+  (doseq [channel (keys @websocket/channel-hub)]
+    (if (= (get  (get @websocket/channel-hub channel) "type") "mainscreen")
+
+      (send! channel (generate-string
+                       {
+                         :room room
+                         :lineno lineno
+                         :type "changestatus"
+                         }
+                       )
+        false)(when (= (get  (get @websocket/channel-hub channel) "content") room)
+
+                (send! channel (generate-string
+                                 {
+                                   :room room
+                                   :lineno lineno
+                                   :type "changestatus"
+                                   }
+                                 )
+                  false)
+
+                )
+
+      )
+
+    )
+  (ok {:success true})
+
+
+  )
 (defn callToRoom [lineno name  room]
 
   (timbre/info "fire callToRoom : " room ",name:" name ",lineno: " lineno )
