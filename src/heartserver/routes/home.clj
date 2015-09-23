@@ -1,6 +1,6 @@
 (ns heartserver.routes.home
   (:require [heartserver.layout :as layout]
-            [compojure.core :refer [defroutes GET]]
+            [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :refer [ok]]
             [heartserver.controllers.home :as home]
             [clojure.java.io :as io]))
@@ -21,5 +21,7 @@
   (GET "/callArrToRoom" [content] (home/callArrToRoom content))
   (GET "/callToRoom" [lineno name  room status] (home/callToRoom lineno name  room status))
   (GET "/changeStatus" [lineno status  room ] (home/changeStatus lineno status  room ))
+  (GET "/firebychangeroom" [oldno newno newname] (home/firebychangeroom oldno newno newname))
+  (POST "/firebychangeroom" [oldno newno newname] (home/firebychangeroom oldno newno newname))
   (GET "/about" [] (about-page)))
 

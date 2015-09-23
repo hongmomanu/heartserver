@@ -104,6 +104,32 @@
   (ok {:success true})
 
   )
+
+(defn firebychangeroom [oldno newno newname]
+
+  (timbre/info "fire by change room  from  oldno : " oldno ",newno:" newno ",newname:" newname )
+  (doseq [channel (keys @websocket/channel-hub)]
+    (when (= (get  (get @websocket/channel-hub channel) "content") oldno)
+
+      (do (send! channel (generate-string
+                           {
+
+                             :roomno oldno
+                             :data  {:newno newno :newname newname}
+                             :type "changeroom"
+                             }
+                           )
+            false)
+        (swap! websocket/channel-hub assoc channel (conj (get @websocket/channel-hub channel) {:content newno}) )
+        )
+
+
+
+      )
+    )
+
+  )
+
 (defn fireprop [room name value]
 
   (timbre/info "fire prop room : " room ",name:" name ",value: " value)
