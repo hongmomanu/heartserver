@@ -16,6 +16,13 @@ To start a web server for the application, run:
 
 ## License
 
+App Sign
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore platforms/android/build/outputs/apk/outpatientRoom.keystore platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk outpatientRoom
+123456
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore platforms/android/build/outputs/apk/outpatientBig.keystore platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk outpatientBig
+shayu626
+
 Copyright © 2015 FIXME
 
 
@@ -25,6 +32,8 @@ Copyright © 2015 FIXME
 http://localhost:3000/fireprop?room=heartbig&name=tip&value=温馨提示：不以物喜，不以己悲。居庙堂之高则忧其民；处江湖之远则忧其君。
 http://localhost:3000/callToRoom?room=1&lineno=A001&name=jack&status=0
 http://localhost:3000/fireprop?room=heartbig&name=showlines&value=4
+http://localhost:3000/firerefreshsystem?room=114
+http://localhost:3000/firebychangeroom?oldno=114&newno=114&newname=温馨
 
 
 

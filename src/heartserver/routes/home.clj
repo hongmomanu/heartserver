@@ -2,6 +2,8 @@
   (:require [heartserver.layout :as layout]
             [compojure.core :refer [defroutes GET POST]]
             [ring.util.http-response :refer [ok]]
+            [ring.util.response :refer [file-response]]
+            [heartserver.public.funcs :as funcs]
             [heartserver.controllers.home :as home]
             [clojure.java.io :as io]))
 
@@ -15,6 +17,11 @@
 (defroutes home-routes
   (GET "/" [] (home-page))
   (GET "/helloheart" [] (ok {:success true}))
+  (GET "/files/:filename" [filename]
+
+    (file-response (str funcs/datapath "files/" filename))
+    )
+
   (GET "/fireprop" [room name value] (home/fireprop room name value))
   (GET "/firerefreshsystem" [room] (home/firerefreshsystem room))
   (GET "/clearscreen" [room] (home/clearscreen room))

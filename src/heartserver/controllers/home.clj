@@ -71,7 +71,7 @@
 (defn callToRoom [lineno name  room status]
 
   (timbre/info "fire callToRoom : " room ",name:" name ",lineno: " lineno )
-  (doseq [channel (keys @websocket/channel-hub)]
+  (future (doseq [channel (keys @websocket/channel-hub)]
     (if (= (get  (get @websocket/channel-hub channel) "type") "mainscreen")
 
       (send! channel (generate-string
@@ -100,7 +100,7 @@
 
       )
 
-    )
+    ))
   (ok {:success true})
 
   )
